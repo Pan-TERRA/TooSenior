@@ -10,7 +10,7 @@ let package = Package(
         .library(
             name: "TooFoundation",
             targets: ["TooFoundation"]
-        ),
+        )
     ],
     targets: [
         .target(
@@ -20,7 +20,7 @@ let package = Package(
         .testTarget(
             name: "TooFoundationTests",
             dependencies: ["TooFoundation"],
-            path: "Tests"
+            path: "Tests/TooFoundationTests"
         )
     ]
 )
