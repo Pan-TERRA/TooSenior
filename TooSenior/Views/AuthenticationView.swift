@@ -10,7 +10,7 @@ import SwiftUI
 struct AuthenticationView: View {
     @StateObject private var viewModel = AuthenticationViewModel()
     @State private var navigationPath = NavigationPath()
-    
+
     var body: some View {
         if viewModel.isLoggedIn {
             MainView()

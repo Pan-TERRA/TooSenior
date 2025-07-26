@@ -35,7 +35,7 @@ extension View {
     func tooAccentButtonStyle() -> some View {
         modifier(TooAccentButtonStyle())
     }
-    
+
     func tooSecondaryButtonStyle() -> some View {
         modifier(TooSecondaryButtonStyle())
     }

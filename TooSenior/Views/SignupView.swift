@@ -10,7 +10,7 @@ import SwiftUI
 struct SignupView: View {
     @ObservedObject var viewModel: AuthenticationViewModel
     @Environment(\.dismiss) private var dismiss
-    
+
     var body: some View {
         ScrollView {
             VStack {
@@ -31,14 +31,14 @@ struct SignupView: View {
         }
         .navigationBarHidden(true)
     }
-    
+
     @ViewBuilder
     private func screenHeader() -> some View {
         VStack(spacing: 16) {
             Text("TooSenior")
                 .font(.largeTitle)
                 .fontWeight(.bold)
-            
+
             Text("Create your account to get started with TooSenior and access all features")
                 .font(.body)
                 .foregroundColor(.secondary)
@@ -46,25 +46,25 @@ struct SignupView: View {
                 .lineLimit(nil)
         }
     }
-    
+
     @ViewBuilder
     private func delimitingText(text: String) -> some View {
         HStack {
             Rectangle()
                 .fill(Color(.separator))
                 .frame(height: 1)
-            
+
             Text(text)
                 .fixedSize(horizontal: true, vertical: false)
                 .padding(.horizontal, 8)
                 .opacity(0.3)
-            
+
             Rectangle()
                 .fill(Color(.separator))
                 .frame(height: 1)
         }
     }
-    
+
     @ViewBuilder
     private func inputFieldsSection() -> some View {
         VStack(spacing: 16) {
@@ -74,7 +74,7 @@ struct SignupView: View {
                 .background(Color(.systemGray6))
                 .cornerRadius(12)
                 .autocapitalization(.words)
-            
+
             // Email Field
             TextField("Enter your email", text: $viewModel.email)
                 .padding()
@@ -83,12 +83,12 @@ struct SignupView: View {
                 .keyboardType(.emailAddress)
                 .autocapitalization(.none)
                 .disableAutocorrection(true)
-            
+
             // Password Field
             VStack {
                 HStack {
                     SecureField("Enter password", text: $viewModel.password)
-                    
+
                     Button(action: {}) {
                         Image(systemName: "eye")
                             .foregroundColor(.gray)
@@ -98,7 +98,7 @@ struct SignupView: View {
                 .background(Color(.systemGray6))
                 .cornerRadius(12)
             }
-            
+
             // Error Message
             if !viewModel.errorMessage.isEmpty {
                 Text(viewModel.errorMessage)
@@ -109,7 +109,7 @@ struct SignupView: View {
             }
         }
     }
-    
+
     @ViewBuilder
     private func signUpButton() -> some View {
         Button(action: {
@@ -132,7 +132,7 @@ struct SignupView: View {
         }
         .disabled(viewModel.isLoading)
     }
-    
+
     @ViewBuilder
     private func loginButton() -> some View {
         Button(action: {
@@ -149,24 +149,24 @@ struct SignupView: View {
         }
         .buttonStyle(PlainButtonStyle())
     }
-    
+
     @ViewBuilder
     private func socialMediaLoginSection() -> some View {
         VStack(spacing: 16) {
             delimitingText(text: "Continue with social media")
-            
+
             // Social Login Buttons
             HStack {
                 Button("Apple") {
                     viewModel.socialLogin()
                 }
                 .tooSecondaryButtonStyle()
-                
+
                 Button("Google") {
                     viewModel.socialLogin()
                 }
                 .tooSecondaryButtonStyle()
-                
+
                 Button("Facebook") {
                     viewModel.socialLogin()
                 }
@@ -174,11 +174,5 @@ struct SignupView: View {
             }
             .disabled(viewModel.isLoading)
         }
-    }
-}
-
-#Preview {
-    NavigationStack {
-        SignupView(viewModel: AuthenticationViewModel())
     }
 }

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct LoginView: View {
     @ObservedObject var viewModel: AuthenticationViewModel
-    
+
     var body: some View {
         ScrollView {
             VStack {
@@ -24,7 +24,7 @@ struct LoginView: View {
                 socialMediaLoginSection()
                 Spacer(minLength: 24)
                 delimitingText(text: "or")
-                
+
                 Button(action: {
                     viewModel.guestLogin()
                 }) {
@@ -38,14 +38,14 @@ struct LoginView: View {
         }
         .navigationBarHidden(true)
     }
-    
+
     @ViewBuilder
     private func screenHeader() -> some View {
         VStack(spacing: 16) {
             Text("TooSenior")
                 .font(.largeTitle)
                 .fontWeight(.bold)
-            
+
             Text("This is a user-friendly login interface where you can access your account easily")
                 .font(.body)
                 .foregroundColor(.secondary)
@@ -53,25 +53,25 @@ struct LoginView: View {
                 .lineLimit(nil)
         }
     }
-    
+
     @ViewBuilder
     private func delimitingText(text: String) -> some View {
         HStack {
             Rectangle()
                 .fill(Color(.separator))
                 .frame(height: 1)
-            
+
             Text(text)
                 .fixedSize(horizontal: true, vertical: false)
                 .padding(.horizontal, 8)
                 .opacity(0.3)
-            
+
             Rectangle()
                 .fill(Color(.separator))
                 .frame(height: 1)
         }
     }
-    
+
     @ViewBuilder
     private func inputFieldsSection() -> some View {
         VStack {
@@ -82,13 +82,13 @@ struct LoginView: View {
                 .keyboardType(.emailAddress)
                 .autocapitalization(.none)
                 .disableAutocorrection(true)
-            
+
             Spacer(minLength: 16)
 
             VStack {
                 HStack {
                     SecureField("Enter password", text: $viewModel.password)
-                    
+
                     Button(action: {}) {
                         Image(systemName: "eye")
                             .foregroundColor(.gray)
@@ -97,7 +97,7 @@ struct LoginView: View {
                 .padding()
                 .background(Color(.systemGray6))
                 .cornerRadius(12)
-                
+
                 NavigationLink("Forgot password?", value: AuthRoute.forgotPassword)
                     .frame(maxWidth: .infinity, alignment: .trailing)
                     .padding(.bottom)
@@ -106,7 +106,7 @@ struct LoginView: View {
             }
         }
     }
-    
+
     @ViewBuilder
     private func signInButton() -> some View {
         Button(action: {
@@ -129,7 +129,7 @@ struct LoginView: View {
         }
         .disabled(viewModel.isLoading)
     }
-    
+
     @ViewBuilder
     private func signUpButton() -> some View {
         NavigationLink(value: AuthRoute.signup) {
@@ -143,24 +143,22 @@ struct LoginView: View {
         }
         .buttonStyle(PlainButtonStyle())
     }
-    
+
     @ViewBuilder
     private func socialMediaLoginSection() -> some View {
         VStack(spacing: 16) {
             delimitingText(text: "Continue with social media")
-            
-            // Social Login Buttons
             HStack {
                 Button("Apple") {
                     viewModel.socialLogin()
                 }
                 .tooSecondaryButtonStyle()
-                
+
                 Button("Google") {
                     viewModel.socialLogin()
                 }
                 .tooSecondaryButtonStyle()
-                
+
                 Button("Facebook") {
                     viewModel.socialLogin()
                 }
@@ -168,11 +166,5 @@ struct LoginView: View {
             }
             .disabled(viewModel.isLoading)
         }
-    }
-}
-
-#Preview {
-    NavigationStack {
-        LoginView(viewModel: AuthenticationViewModel())
     }
 }

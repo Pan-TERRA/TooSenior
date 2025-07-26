@@ -14,17 +14,17 @@ struct MainView: View {
                 Image(systemName: "checkmark.circle.fill")
                     .font(.system(size: 80))
                     .foregroundColor(.green)
-                
+
                 Text("Welcome to TooSenior!")
                     .font(.largeTitle)
                     .fontWeight(.bold)
                     .multilineTextAlignment(.center)
-                
+
                 Text("There is nothing here yet.")
                     .font(.title2)
                     .foregroundColor(.secondary)
                     .multilineTextAlignment(.center)
-                
+
                 Spacer()
             }
             .padding()
