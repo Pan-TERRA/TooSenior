@@ -89,10 +89,10 @@ struct SignupView: View {
                 HStack {
                     SecureField("Enter password", text: $viewModel.password)
 
-                    Button(action: {}) {
+                    Button(action: {}, label: {
                         Image(systemName: "eye")
                             .foregroundColor(.gray)
-                    }
+                    })
                 }
                 .padding()
                 .background(Color(.systemGray6))
@@ -114,7 +114,7 @@ struct SignupView: View {
     private func signUpButton() -> some View {
         Button(action: {
             viewModel.signup()
-        }) {
+        }, label: {
             HStack {
                 if viewModel.isLoading {
                     ProgressView()
@@ -129,7 +129,7 @@ struct SignupView: View {
             .background(Color.black)
             .foregroundColor(.white)
             .cornerRadius(12)
-        }
+        })
         .disabled(viewModel.isLoading)
     }
 
@@ -138,7 +138,7 @@ struct SignupView: View {
         Button(action: {
             viewModel.clearForm()
             dismiss()
-        }) {
+        }, label: {
             HStack(spacing: 0) {
                 Text("Already have an account?")
                     .foregroundColor(.primary)
@@ -146,7 +146,7 @@ struct SignupView: View {
                     .foregroundColor(.blue)
             }
             .font(.footnote)
-        }
+        })
         .buttonStyle(PlainButtonStyle())
     }
 
