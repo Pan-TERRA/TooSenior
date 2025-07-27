@@ -7,32 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A353273B2E3673450001209C /* AuthRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = A35327382E3673450001209C /* AuthRoute.swift */; };
-		A353273C2E3673450001209C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A35327392E3673450001209C /* User.swift */; };
 		A35327482E3673530001209C /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A35327452E3673530001209C /* MainView.swift */; };
 		A35327492E3673530001209C /* TooSeniorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A353273D2E3673530001209C /* TooSeniorApp.swift */; };
-		A353274A2E3673530001209C /* AuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A353273E2E3673530001209C /* AuthenticationViewModel.swift */; };
-		A353274B2E3673530001209C /* SignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A35327462E3673530001209C /* SignupView.swift */; };
-		A353274C2E3673530001209C /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A35327442E3673530001209C /* LoginView.swift */; };
-		A353274D2E3673530001209C /* ButtonViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = A35327402E3673530001209C /* ButtonViewModifiers.swift */; };
-		A353274E2E3673530001209C /* AuthenticationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A35327422E3673530001209C /* AuthenticationView.swift */; };
-		A353274F2E3673530001209C /* ForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A35327432E3673530001209C /* ForgotPasswordView.swift */; };
 		A38823772DC6C63100C11512 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A388236C2DC6C63100C11512 /* LaunchScreen.storyboard */; };
 		A38823782DC6C63100C11512 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A38823692DC6C63100C11512 /* Assets.xcassets */; };
 		A388237B2DC6CA8E00C11512 /* TooFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = A388237A2DC6CA8E00C11512 /* TooFoundation */; };
+		A3C8508F2E367A5500B362B1 /* OnboardingUI in Frameworks */ = {isa = PBXBuildFile; productRef = A3C8508E2E367A5500B362B1 /* OnboardingUI */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		A35327382E3673450001209C /* AuthRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRoute.swift; sourceTree = "<group>"; };
-		A35327392E3673450001209C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A353273D2E3673530001209C /* TooSeniorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TooSeniorApp.swift; sourceTree = "<group>"; };
-		A353273E2E3673530001209C /* AuthenticationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewModel.swift; sourceTree = "<group>"; };
-		A35327402E3673530001209C /* ButtonViewModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonViewModifiers.swift; sourceTree = "<group>"; };
-		A35327422E3673530001209C /* AuthenticationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationView.swift; sourceTree = "<group>"; };
-		A35327432E3673530001209C /* ForgotPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
-		A35327442E3673530001209C /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		A35327452E3673530001209C /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
-		A35327462E3673530001209C /* SignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupView.swift; sourceTree = "<group>"; };
 		A38822A82DC6AC9700C11512 /* TooSenior.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TooSenior.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A38823692DC6C63100C11512 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A388236A2DC6C63100C11512 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -45,45 +30,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				A388237B2DC6CA8E00C11512 /* TooFoundation in Frameworks */,
+				A3C8508F2E367A5500B362B1 /* OnboardingUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		A353273A2E3673450001209C /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				A35327382E3673450001209C /* AuthRoute.swift */,
-				A35327392E3673450001209C /* User.swift */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		A353273F2E3673530001209C /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-				A353273E2E3673530001209C /* AuthenticationViewModel.swift */,
-			);
-			path = ViewModels;
-			sourceTree = "<group>";
-		};
-		A35327412E3673530001209C /* ViewModifiers */ = {
-			isa = PBXGroup;
-			children = (
-				A35327402E3673530001209C /* ButtonViewModifiers.swift */,
-			);
-			path = ViewModifiers;
-			sourceTree = "<group>";
-		};
 		A35327472E3673530001209C /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				A35327422E3673530001209C /* AuthenticationView.swift */,
-				A35327432E3673530001209C /* ForgotPasswordView.swift */,
-				A35327442E3673530001209C /* LoginView.swift */,
 				A35327452E3673530001209C /* MainView.swift */,
-				A35327462E3673530001209C /* SignupView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -92,10 +49,7 @@
 			isa = PBXGroup;
 			children = (
 				A353273D2E3673530001209C /* TooSeniorApp.swift */,
-				A353273F2E3673530001209C /* ViewModels */,
-				A35327412E3673530001209C /* ViewModifiers */,
 				A35327472E3673530001209C /* Views */,
-				A353273A2E3673450001209C /* Models */,
 				A388236D2DC6C63100C11512 /* Resources */,
 				A38822A92DC6AC9700C11512 /* Products */,
 			);
@@ -138,6 +92,7 @@
 			name = TooSenior;
 			packageProductDependencies = (
 				A388237A2DC6CA8E00C11512 /* TooFoundation */,
+				A3C8508E2E367A5500B362B1 /* OnboardingUI */,
 			);
 			productName = TooSenior;
 			productReference = A38822A82DC6AC9700C11512 /* TooSenior.app */;
@@ -170,6 +125,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				A38823792DC6CA8E00C11512 /* XCLocalSwiftPackageReference "../Modules/TooFoundation" */,
+				A3C8508D2E367A5500B362B1 /* XCLocalSwiftPackageReference "../Modules/OnboardingUI" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = A38822A92DC6AC9700C11512 /* Products */;
@@ -221,16 +177,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A353273B2E3673450001209C /* AuthRoute.swift in Sources */,
 				A35327482E3673530001209C /* MainView.swift in Sources */,
 				A35327492E3673530001209C /* TooSeniorApp.swift in Sources */,
-				A353274A2E3673530001209C /* AuthenticationViewModel.swift in Sources */,
-				A353274B2E3673530001209C /* SignupView.swift in Sources */,
-				A353274C2E3673530001209C /* LoginView.swift in Sources */,
-				A353274D2E3673530001209C /* ButtonViewModifiers.swift in Sources */,
-				A353274E2E3673530001209C /* AuthenticationView.swift in Sources */,
-				A353274F2E3673530001209C /* ForgotPasswordView.swift in Sources */,
-				A353273C2E3673450001209C /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -466,12 +414,20 @@
 			isa = XCLocalSwiftPackageReference;
 			relativePath = ../Modules/TooFoundation;
 		};
+		A3C8508D2E367A5500B362B1 /* XCLocalSwiftPackageReference "../Modules/OnboardingUI" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../Modules/OnboardingUI;
+		};
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
 		A388237A2DC6CA8E00C11512 /* TooFoundation */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = TooFoundation;
+		};
+		A3C8508E2E367A5500B362B1 /* OnboardingUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = OnboardingUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import OnboardingUI
 
 @main
 struct TooSeniorApp: App {
