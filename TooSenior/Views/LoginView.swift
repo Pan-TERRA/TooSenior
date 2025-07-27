@@ -27,9 +27,9 @@ struct LoginView: View {
 
                 Button(action: {
                     viewModel.guestLogin()
-                }) {
+                }, label: {
                     Text("Continue as a Guest")
-                }
+                })
                 .tooSecondaryButtonStyle()
                 .padding(.bottom, 40)
             }
@@ -89,10 +89,10 @@ struct LoginView: View {
                 HStack {
                     SecureField("Enter password", text: $viewModel.password)
 
-                    Button(action: {}) {
+                    Button(action: {}, label: {
                         Image(systemName: "eye")
                             .foregroundColor(.gray)
-                    }
+                    })
                 }
                 .padding()
                 .background(Color(.systemGray6))
@@ -111,7 +111,7 @@ struct LoginView: View {
     private func signInButton() -> some View {
         Button(action: {
             viewModel.login()
-        }) {
+        }, label: {
             HStack {
                 if viewModel.isLoading {
                     ProgressView()
@@ -126,7 +126,7 @@ struct LoginView: View {
             .background(Color.black)
             .foregroundColor(.white)
             .cornerRadius(12)
-        }
+        })
         .disabled(viewModel.isLoading)
     }
 

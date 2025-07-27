@@ -4,4 +4,7 @@
    <FileRef
       location = "group:TooSenior/TooSenior.xcodeproj">
    </FileRef>
+   <FileRef
+      location = "group:Modules/TooFoundation/Package.swift">
+   </FileRef>
 </Workspace>
