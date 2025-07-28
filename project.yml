@@ -1,0 +1,56 @@
+name: TooSenior
+options:
+  bundleIdPrefix: com.vladyslav-krut
+  createIntermediateGroups: true
+  defaultConfig: Debug
+  deploymentTarget:
+    iOS: "17.0"
+
+configs:
+  Debug: debug
+  Release: release
+
+targets:
+  TooSenior:
+    type: application
+    platform: iOS
+    deploymentTarget: "17.0"
+    
+    sources:
+      - path: TooSenior
+        excludes:
+          - "**/*.xcodeproj"
+    
+    resources:
+      - TooSenior/Resources/Assets.xcassets
+      - TooSenior/Resources/Base.lproj/LaunchScreen.storyboard
+    
+    
+    dependencies:
+      - package: TooFoundation
+      - package: OnboardingUI
+    
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.vladyslav-krut.TooSenior
+        DEVELOPMENT_TEAM: ""
+        CODE_SIGN_STYLE: Automatic
+        GENERATE_INFOPLIST_FILE: YES
+        ENABLE_USER_SCRIPT_SANDBOXING: NO
+        INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents: YES
+        INFOPLIST_KEY_UILaunchStoryboardName: LaunchScreen
+        INFOPLIST_KEY_UISupportedInterfaceOrientations: UIInterfaceOrientationPortrait
+
+packages:
+  TooFoundation:
+    path: Modules/TooFoundation
+  OnboardingUI:
+    path: Modules/OnboardingUI
+
+schemes:
+  TooSenior:
+    build:
+      targets:
+        TooSenior: all
+    run:
+      config: Debug
