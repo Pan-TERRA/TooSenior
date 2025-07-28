@@ -87,6 +87,10 @@ fi
 
 print_info "Creating PR from branch: $CURRENT_BRANCH → $TARGET_BRANCH"
 
+# Fetch latest remote changes
+print_status "Fetching latest changes..."
+git fetch origin >/dev/null 2>&1
+
 # Get commit messages for PR description
 print_status "Analyzing commits..."
 
