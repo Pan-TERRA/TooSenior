@@ -27,6 +27,7 @@ targets:
     
     
     dependencies:
+      - package: AuthCore
       - package: TooFoundation
       - package: OnboardingUI
     
@@ -47,6 +48,8 @@ packages:
   OnboardingUI:
     path: Modules/OnboardingUI
 
+  AuthCore:
+    path: Modules/AuthCore
 schemes:
   TooSenior:
     build:
