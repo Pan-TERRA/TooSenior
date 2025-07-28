@@ -25,8 +25,6 @@ targets:
       - TooSenior/Resources/Assets.xcassets
       - TooSenior/Resources/Base.lproj/LaunchScreen.storyboard
     
-    info:
-      path: TooSenior/Resources/Info.plist
     
     dependencies:
       - package: TooFoundation
@@ -37,6 +35,11 @@ targets:
         PRODUCT_BUNDLE_IDENTIFIER: com.vladyslav-krut.TooSenior
         DEVELOPMENT_TEAM: ""
         CODE_SIGN_STYLE: Automatic
+        GENERATE_INFOPLIST_FILE: YES
+        ENABLE_USER_SCRIPT_SANDBOXING: NO
+        INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents: YES
+        INFOPLIST_KEY_UILaunchStoryboardName: LaunchScreen
+        INFOPLIST_KEY_UISupportedInterfaceOrientations: UIInterfaceOrientationPortrait
 
 packages:
   TooFoundation:
