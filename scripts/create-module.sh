@@ -118,14 +118,13 @@ print_status "Created test template"
 if [ -f "project.yml" ]; then
     print_status "Adding module to project.yml..."
     
-    # Add to packages section
-    cat >> project.yml << EOF
-
-  $MODULE_NAME:
-    path: Modules/$MODULE_NAME
-EOF
+    # Add to packages section - insert before "schemes:" line
+    sed -i '' '/^schemes:/i\
+  '"$MODULE_NAME"':\
+    path: Modules/'"$MODULE_NAME"'\
+' project.yml
     
-    # Add to dependencies section (insert before existing packages)
+    # Add to dependencies section
     if grep -q "dependencies:" project.yml; then
         sed -i '' '/dependencies:/a\
       - package: '"$MODULE_NAME"'
