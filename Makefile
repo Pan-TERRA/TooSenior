@@ -1,11 +1,12 @@
 # TooSenior Makefile
 
-.PHONY: bootstrap lint-fix create-module open-pr
+.PHONY: bootstrap lint-fix create-module open-pr generate-project
 
 # Install development tools
 bootstrap:
 	@echo "🍺 Installing development tools..."
 	@command -v swiftlint >/dev/null || (echo "Installing SwiftLint..." && brew install swiftlint)
+	@command -v xcodegen >/dev/null || (echo "Installing XcodeGen..." && brew install xcodegen)
 	@echo "✅ Bootstrap completed"
 
 # Auto-fix SwiftLint issues
@@ -20,6 +21,12 @@ create-module:
 # Open pull request from current branch  
 open-pr:
 	@./scripts/open-pr.sh $(filter-out $@,$(MAKECMDGOALS))
+
+# Generate Xcode project from project.yml
+generate-project:
+	@echo "🏗️  Generating Xcode project..."
+	@xcodegen generate
+	@echo "✅ Project generated successfully!"
 
 # Allow any target name for create-module
 %:

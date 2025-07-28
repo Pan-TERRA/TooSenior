@@ -114,9 +114,31 @@ EOF
 
 print_status "Created test template"
 
+# Add module to project.yml
+if [ -f "project.yml" ]; then
+    print_status "Adding module to project.yml..."
+    
+    # Add to packages section
+    cat >> project.yml << EOF
+
+  $MODULE_NAME:
+    path: Modules/$MODULE_NAME
+EOF
+    
+    # Add to dependencies section (insert before existing packages)
+    if grep -q "dependencies:" project.yml; then
+        sed -i '' '/dependencies:/a\
+      - package: '"$MODULE_NAME"'
+' project.yml
+    fi
+    
+    print_status "Regenerating Xcode project..."
+    xcodegen generate
+fi
+
 print_status "Module '$MODULE_NAME' created successfully!"
 echo ""
 print_warning "Next steps:"
-echo "1. Add the module to your workspace in Xcode"
-echo "2. Remove EmptyFile.swift when you add your first source file"
-echo "3. Import the module in your main app: import $MODULE_NAME"
+echo "1. Remove EmptyFile.swift when you add your first source file"
+echo "2. Import the module in your main app: import $MODULE_NAME"
+echo "3. Run 'make generate-project' if you need to regenerate the project"
