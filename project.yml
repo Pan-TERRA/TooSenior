@@ -27,6 +27,7 @@ targets:
     
     
     dependencies:
+      - package: TooStorage
       - package: AuthCore
       - package: TooFoundation
       - package: OnboardingUI
@@ -50,6 +51,8 @@ packages:
 
   AuthCore:
     path: Modules/AuthCore
+  TooStorage:
+    path: Modules/TooStorage
 schemes:
   TooSenior:
     build:
