@@ -27,6 +27,7 @@ targets:
     
     
     dependencies:
+      - package: TooNetworking
       - package: TooStorage
       - package: AuthCore
       - package: TooFoundation
@@ -53,6 +54,8 @@ packages:
     path: Modules/AuthCore
   TooStorage:
     path: Modules/TooStorage
+  TooNetworking:
+    path: Modules/TooNetworking
 schemes:
   TooSenior:
     build:
