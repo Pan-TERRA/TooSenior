@@ -1,22 +1,25 @@
 import Foundation
 
 public actor NetworkClient {
+    private let configuration: NetworkConfiguration
     private let session: URLSession
     private let pluginComposer: PluginComposer
     private let tokenInteractor: TokenRefreshInteractorProtocol
     
-    public init(
-        session: URLSession = URLSession.shared,
-        plugins: [NetworkPlugin] = [],
-        tokenInteractor: TokenRefreshInteractorProtocol
+    init(
+        configuration: NetworkConfiguration,
+        tokenInteractor: TokenRefreshInteractorProtocol,
+        plugins: [NetworkPlugin],
+        session: URLSession
     ) {
+        self.configuration = configuration
         self.session = session
         self.pluginComposer = PluginComposer(plugins: plugins)
         self.tokenInteractor = tokenInteractor
     }
     
     public func perform<T>(
-        request: NetworkRequest,
+        request: HTTPRequest,
         serializer: ResponseSerializer<T>
     ) async throws -> ApiResponse<T> {
         let urlRequest = try await buildRequestWithPlugins(request)
@@ -35,8 +38,11 @@ public actor NetworkClient {
         }
     }
     
-    private func buildRequestWithPlugins(_ networkRequest: NetworkRequest) async throws -> URLRequest {
-        var urlRequest = networkRequest.urlRequest
+    private func buildRequestWithPlugins(_ httpRequest: HTTPRequest) async throws -> URLRequest {
+        var urlRequest = try httpRequest.urlRequest(
+            baseURL: configuration.baseURL,
+            defaultHeaders: configuration.defaultHeaders
+        )
         try await pluginComposer.processRequest(&urlRequest)
         return urlRequest
     }
