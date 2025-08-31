@@ -2,9 +2,9 @@ import Foundation
 
 public struct TwoFactorChallenge: Sendable {
     public let verificationMethods: [VerificationMethod]
-    public let originalRequest: NetworkRequest
+    public let originalRequest: HTTPRequest
     
-    public init(verificationMethods: [VerificationMethod], originalRequest: NetworkRequest) {
+    public init(verificationMethods: [VerificationMethod], originalRequest: HTTPRequest) {
         self.verificationMethods = verificationMethods
         self.originalRequest = originalRequest
     }

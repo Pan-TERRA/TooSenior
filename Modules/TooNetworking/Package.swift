@@ -12,9 +12,13 @@ let package = Package(
             targets: ["TooNetworking"]
         )
     ],
+    dependencies: [
+        .package(path: "../TooFoundation")
+    ],
     targets: [
         .target(
             name: "TooNetworking",
+            dependencies: ["TooFoundation"],
             path: "Sources"
         ),
         .testTarget(

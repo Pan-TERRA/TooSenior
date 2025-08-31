@@ -1,4 +1,5 @@
 import Foundation
+import TooFoundation
 
 public struct LoggerPlugin: NetworkPlugin {
     private let logger: Logger

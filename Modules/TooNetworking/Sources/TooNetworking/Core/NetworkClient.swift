@@ -20,7 +20,7 @@ public actor NetworkClient {
     
     public func perform<T>(
         request: HTTPRequest,
-        serializer: ResponseSerializer<T>
+        serializer: any ResponseSerializer<T>
     ) async throws -> ApiResponse<T> {
         let urlRequest = try await buildRequestWithPlugins(request)
         
@@ -49,7 +49,7 @@ public actor NetworkClient {
     
     private func executeRequest<T>(
         _ urlRequest: URLRequest,
-        serializer: ResponseSerializer<T>
+        serializer: any ResponseSerializer<T>
     ) async throws -> ApiResponse<T> {
         let (data, response) = try await session.data(for: urlRequest)
         
