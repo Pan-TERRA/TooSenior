@@ -6,6 +6,7 @@ public final class NetworkClientFactory {
     public static func mainAPI() -> NetworkClient {
         NetworkClient(
             configuration: NetworkConfiguration.mainAPI(baseURL: mainAPIBaseURL),
+            tokenStore: SecureTokenStore.shared,
             tokenInteractor: DefaultTokenRefreshInteractor(),
             plugins: [LoggerPlugin()],
             session: .shared

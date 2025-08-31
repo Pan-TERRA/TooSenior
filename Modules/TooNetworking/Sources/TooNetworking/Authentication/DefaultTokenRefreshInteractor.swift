@@ -1,8 +1,11 @@
 import Foundation
 
 public final class DefaultTokenRefreshInteractor: TokenRefreshInteractorProtocol {
+    private let tokenStore: SecureTokenStoreProtocol
     
-    public init() {}
+    public init(tokenStore: SecureTokenStoreProtocol = SecureTokenStore.shared) {
+        self.tokenStore = tokenStore
+    }
     
     public func validateAndRefreshToken() async throws {
         if await isTokenExpired() {
@@ -20,7 +23,7 @@ public final class DefaultTokenRefreshInteractor: TokenRefreshInteractorProtocol
         
         do {
             let newToken = try await performTokenRefresh(currentToken: currentToken)
-            TokenHeaderManager.shared.updateToken(newToken)
+            await tokenStore.setToken(newToken)
             return true
         } catch {
             return false
@@ -28,7 +31,7 @@ public final class DefaultTokenRefreshInteractor: TokenRefreshInteractorProtocol
     }
     
     public func getCurrentToken() async -> String? {
-        TokenHeaderManager.shared.currentToken
+        return await tokenStore.getToken()
     }
     
     public func isTokenExpired() async -> Bool {
@@ -40,7 +43,7 @@ public final class DefaultTokenRefreshInteractor: TokenRefreshInteractorProtocol
     }
     
     public func clearTokens() async {
-        TokenHeaderManager.shared.updateToken(nil)
+        await tokenStore.clearToken()
     }
     
     private func performTokenRefresh(currentToken: String) async throws -> String {

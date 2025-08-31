@@ -5,14 +5,17 @@ public actor NetworkClient {
     private let session: URLSession
     private let pluginComposer: PluginComposer
     private let tokenInteractor: TokenRefreshInteractorProtocol
+    private let tokenStore: SecureTokenStoreProtocol
     
     init(
         configuration: NetworkConfiguration,
+        tokenStore: SecureTokenStoreProtocol,
         tokenInteractor: TokenRefreshInteractorProtocol,
         plugins: [NetworkPlugin],
         session: URLSession
     ) {
         self.configuration = configuration
+        self.tokenStore = tokenStore
         self.session = session
         self.pluginComposer = PluginComposer(plugins: plugins)
         self.tokenInteractor = tokenInteractor
@@ -43,8 +46,22 @@ public actor NetworkClient {
             baseURL: configuration.baseURL,
             defaultHeaders: configuration.defaultHeaders
         )
+        
+        if let authHeader = await resolveAuthorization(httpRequest.authorization) {
+            urlRequest.setValue(authHeader, forHTTPHeaderField: "Authorization")
+        }
+        
         try await pluginComposer.processRequest(&urlRequest)
         return urlRequest
+    }
+    
+    private func resolveAuthorization(_ authorization: Authorization?) async -> String? {
+        switch authorization {
+        case .currentUser:
+            return await tokenStore.getAuthorizationHeader()
+        case .none, nil:
+            return nil
+        }
     }
     
     private func executeRequest<T>(

@@ -94,10 +94,6 @@ public struct HTTPRequest: Sendable {
             request.setValue(header.value, forHTTPHeaderField: header.name)
         }
         
-        if let authHeader = authorization?.headerValue {
-            request.setValue(authHeader, forHTTPHeaderField: "Authorization")
-        }
-        
         switch parameters {
         case .body(let data, let contentType), .bodyAndQuery(let data, let contentType, _):
             request.httpBody = data
