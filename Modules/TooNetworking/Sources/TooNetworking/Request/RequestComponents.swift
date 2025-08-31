@@ -208,9 +208,9 @@ public struct CachePolicy: RequestComponent {
 // MARK: - Authorization Component
 
 public struct Auth: RequestComponent {
-    private let authorization: Authorization?
+    private let authorization: Authorization
     
-    public init(_ authorization: Authorization?) {
+    public init(_ authorization: Authorization) {
         self.authorization = authorization
     }
     
@@ -219,7 +219,7 @@ public struct Auth: RequestComponent {
     }
     
     public static var none: Auth {
-        Auth(nil)
+        Auth(.none)
     }
     
     public func apply(to builder: inout HTTPRequestBuilder) {

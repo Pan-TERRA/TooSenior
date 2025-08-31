@@ -7,7 +7,7 @@ public struct HTTPRequest: Sendable {
     public let headers: [HTTPHeader]
     public let timeout: TimeInterval
     public let cachePolicy: URLRequest.CachePolicy
-    public let authorization: Authorization?
+    public let authorization: Authorization
     
     public init(
         path: String,
@@ -16,7 +16,7 @@ public struct HTTPRequest: Sendable {
         headers: [HTTPHeader] = [],
         timeout: TimeInterval = 30,
         cachePolicy: URLRequest.CachePolicy = .useProtocolCachePolicy,
-        authorization: Authorization? = nil
+        authorization: Authorization = .none
     ) {
         self.path = path
         self.method = method

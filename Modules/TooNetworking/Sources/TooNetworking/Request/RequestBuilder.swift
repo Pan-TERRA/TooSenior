@@ -40,7 +40,7 @@ public struct HTTPRequestBuilder: Sendable {
     private(set) var headers: [HTTPHeader] = []
     private(set) var timeout: TimeInterval = 30
     private(set) var cachePolicy: URLRequest.CachePolicy = .useProtocolCachePolicy
-    private(set) var authorization: Authorization?
+    private(set) var authorization: Authorization = .none
     
     public init() {}
     
@@ -68,7 +68,7 @@ public struct HTTPRequestBuilder: Sendable {
         self.cachePolicy = cachePolicy
     }
     
-    public mutating func setAuthorization(_ authorization: Authorization?) {
+    public mutating func setAuthorization(_ authorization: Authorization) {
         self.authorization = authorization
     }
     
