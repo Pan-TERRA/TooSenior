@@ -5,6 +5,8 @@ public enum NetworkError: Error, Sendable {
     case noData
     case invalidResponse
     case unauthorized
+    case authenticationRequired
+    case httpError(statusCode: Int)
     case twoFactorRequired(TwoFactorChallenge)
     case serverError(Int, Data?)
     case serializationError(Error)

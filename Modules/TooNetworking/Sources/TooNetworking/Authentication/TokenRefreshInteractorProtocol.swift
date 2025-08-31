@@ -1,9 +1,9 @@
 import Foundation
 
 public protocol TokenRefreshInteractorProtocol: Sendable {
-    func shouldRefreshToken(for response: HTTPURLResponse) async -> Bool
-    func isTokenExpired() async -> Bool
-    func refreshToken() async throws -> String
+    func validateAndRefreshToken() async throws
+    func attemptTokenRefresh() async -> Bool
     func getCurrentToken() async -> String?
+    func isTokenExpired() async -> Bool
     func clearTokens() async
 }
