@@ -45,7 +45,18 @@ public final class DefaultTokenRefreshInteractor: TokenRefreshInteractorProtocol
     
     private func performTokenRefresh(currentToken: String) async throws -> String {
         // TODO: This should call your actual token refresh endpoint
-        throw NetworkError.tokenRefreshFailed
+        // Mock implementation for testing - replace with real API call
+        try await Task.sleep(for: .milliseconds(300))
+        
+        // Return a mock JWT token with future expiration (1 hour from now)
+        let futureTimestamp = Date().timeIntervalSince1970 + 3600 // 1 hour
+        let mockPayload = "{\"sub\":\"mock-user\",\"exp\":\(Int(futureTimestamp))}"
+        let mockPayloadBase64 = Data(mockPayload.utf8).base64EncodedString()
+            .replacingOccurrences(of: "+", with: "-")
+            .replacingOccurrences(of: "/", with: "_")
+            .replacingOccurrences(of: "=", with: "")
+        
+        return "mock.header.\(mockPayloadBase64).mock.signature"
     }
     
     private func isJWTExpired(_ token: String) -> Bool {

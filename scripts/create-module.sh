@@ -61,7 +61,7 @@ print_status "Created directory structure"
 
 # Create Package.swift
 cat > "$MODULE_DIR/Package.swift" << EOF
-// swift-tools-version:5.9
+// swift-tools-version:6.1
 import PackageDescription
 
 let package = Package(

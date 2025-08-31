@@ -1,6 +1,6 @@
 import Foundation
 
-public final class TokenHeaderManager {
+public final class TokenHeaderManager: @unchecked Sendable {
     public static let shared = TokenHeaderManager()
     
     private let queue = DispatchQueue(label: "TokenHeaderManager")
