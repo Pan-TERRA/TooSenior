@@ -20,6 +20,12 @@ make generate-project
 ```
 Regenerates Xcode project from project.yml using XcodeGen
 
+**Module Testing**
+```bash
+cd Modules/[MODULE_NAME] && xcodebuild test -scheme [MODULE_NAME] -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone SE (3rd generation)'
+```
+Tests individual Swift package modules with proper iOS targeting. Default uses iPhone SE (3rd generation), but simulator name can be changed as needed
+
 ## Workflow Instructions
 
 1. **Creating new modules**: Always use `make create-module` instead of manual directory creation
