@@ -6,7 +6,7 @@ public enum Authorization: Sendable {
     var headerValue: String? {
         switch self {
         case .currentUser:
-            return TokenManager.shared.currentAccessToken.map { "Bearer \($0)" }
+            return TokenHeaderManager.shared.authorizationHeader
         }
     }
 }
