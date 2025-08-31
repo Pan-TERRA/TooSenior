@@ -9,14 +9,14 @@ public struct HTTPRequest: Sendable {
     public let cachePolicy: URLRequest.CachePolicy
     public let authorization: Authorization?
     
-    private init(
+    public init(
         path: String,
         method: HTTPMethod,
-        parameters: HTTPParameters,
-        headers: [HTTPHeader],
-        timeout: TimeInterval,
-        cachePolicy: URLRequest.CachePolicy,
-        authorization: Authorization?
+        parameters: HTTPParameters = .empty,
+        headers: [HTTPHeader] = [],
+        timeout: TimeInterval = 30,
+        cachePolicy: URLRequest.CachePolicy = .useProtocolCachePolicy,
+        authorization: Authorization? = nil
     ) {
         self.path = path
         self.method = method
@@ -27,50 +27,61 @@ public struct HTTPRequest: Sendable {
         self.authorization = authorization
     }
     
-    public static func authorized(
-        path: String,
-        method: HTTPMethod,
-        parameters: HTTPParameters = .empty,
-        headers: [HTTPHeader] = [],
-        timeout: TimeInterval = 30,
-        cachePolicy: URLRequest.CachePolicy = .useProtocolCachePolicy
-    ) -> HTTPRequest {
-        HTTPRequest(
-            path: path,
-            method: method,
-            parameters: parameters,
-            headers: headers,
-            timeout: timeout,
-            cachePolicy: cachePolicy,
-            authorization: .currentUser
-        )
-    }
     
-    public static func unauthorized(
-        path: String,
-        method: HTTPMethod,
-        parameters: HTTPParameters = .empty,
-        headers: [HTTPHeader] = [],
-        timeout: TimeInterval = 30,
-        cachePolicy: URLRequest.CachePolicy = .useProtocolCachePolicy
-    ) -> HTTPRequest {
-        HTTPRequest(
-            path: path,
-            method: method,
-            parameters: parameters,
-            headers: headers,
-            timeout: timeout,
-            cachePolicy: cachePolicy,
-            authorization: nil
-        )
+    // MARK: - Declarative API
+    
+    public static func build(@RequestBuilder _ content: () -> [RequestComponent]) -> HTTPRequest {
+        var builder = HTTPRequestBuilder()
+        let components = content()
+        
+        for component in components {
+            component.apply(to: &builder)
+        }
+        
+        return builder.build()
     }
     
     func urlRequest(baseURL: String, defaultHeaders: [String: String]) throws -> URLRequest {
-        guard let url = URL(string: baseURL + path) else {
-            throw NetworkError.invalidURL(baseURL + path)
+        var finalURL: URL
+        
+        switch parameters {
+        case .query(let queryParams), .bodyAndQuery(_, _, let queryParams):
+            guard var urlComponents = URLComponents(string: baseURL + path) else {
+                throw NetworkError.invalidURL(baseURL + path)
+            }
+            
+            let queryItems = queryParams.map { URLQueryItem(name: $0.key, value: $0.value) }
+            urlComponents.queryItems = queryItems
+            
+            guard let url = urlComponents.url else {
+                throw NetworkError.invalidURL(baseURL + path)
+            }
+            finalURL = url
+            
+        case .multipleValueFieldQuery(let multiValueParams):
+            guard var urlComponents = URLComponents(string: baseURL + path) else {
+                throw NetworkError.invalidURL(baseURL + path)
+            }
+            
+            var queryItems: [URLQueryItem] = []
+            for (key, values) in multiValueParams {
+                queryItems.append(contentsOf: values.map { URLQueryItem(name: key, value: $0) })
+            }
+            urlComponents.queryItems = queryItems
+            
+            guard let url = urlComponents.url else {
+                throw NetworkError.invalidURL(baseURL + path)
+            }
+            finalURL = url
+            
+        default:
+            guard let url = URL(string: baseURL + path) else {
+                throw NetworkError.invalidURL(baseURL + path)
+            }
+            finalURL = url
         }
         
-        var request = URLRequest(url: url)
+        var request = URLRequest(url: finalURL)
         request.httpMethod = method.rawValue
         request.timeoutInterval = timeout
         request.cachePolicy = cachePolicy
@@ -85,6 +96,15 @@ public struct HTTPRequest: Sendable {
         
         if let authHeader = authorization?.headerValue {
             request.setValue(authHeader, forHTTPHeaderField: "Authorization")
+        }
+        
+        switch parameters {
+        case .body(let data, let contentType), .bodyAndQuery(let data, let contentType, _):
+            request.httpBody = data
+            request.setValue(contentType.toString(), forHTTPHeaderField: "Content-Type")
+            
+        case .query, .multipleValueFieldQuery, .empty:
+            break
         }
         
         return request
