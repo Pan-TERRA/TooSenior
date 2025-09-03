@@ -1,0 +1,38 @@
+#!/bin/zsh
+#
+# SwiftLint wrapper for Xcode build phases
+# This script ensures SwiftLint runs with proper shell environment
+#
+# Usage: Scripts/swiftlint
+#
+
+set -euo pipefail
+
+# Setup shell environment for Xcode build phases
+# 
+# In Xcode build phases, the default shell (/bin/sh) doesn't source user configuration
+# files like .zprofile and .zshrc, which means tools installed via Homebrew and other
+# package managers are not available in the PATH.
+#
+# This setup mimics the same environment that developers have in their terminal,
+# ensuring consistent behavior between Xcode builds and command-line builds.
+
+if [ -f "${HOME}/.zprofile" ]; then
+    source "${HOME}/.zprofile"
+fi
+
+if [ -f "${HOME}/.zshrc" ]; then
+    source "${HOME}/.zshrc"
+fi
+
+# Run SwiftLint
+echo "🔍 Running SwiftLint..."
+
+if command -v swiftlint >/dev/null 2>&1; then
+    cd "${SRCROOT}"
+    swiftlint
+    echo "✅ SwiftLint completed successfully"
+else
+    echo "warning: SwiftLint not installed. Run 'make bootstrap' or 'brew install swiftlint'"
+    exit 1
+fi

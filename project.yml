@@ -27,11 +27,17 @@ targets:
     
     
     dependencies:
+      - package: FeedKitCore
       - package: TooNetworking
       - package: TooStorage
       - package: AuthCore
       - package: TooFoundation
       - package: OnboardingUI
+    
+    preBuildScripts:
+      - script: Scripts/swiftlint
+        name: SwiftLint
+        basedOnDependencyAnalysis: false
     
     settings:
       base:
@@ -49,13 +55,14 @@ packages:
     path: Modules/TooFoundation
   OnboardingUI:
     path: Modules/OnboardingUI
-
   AuthCore:
     path: Modules/AuthCore
   TooStorage:
     path: Modules/TooStorage
   TooNetworking:
     path: Modules/TooNetworking
+  FeedKitCore:
+    path: Modules/FeedKitCore
 schemes:
   TooSenior:
     build:
