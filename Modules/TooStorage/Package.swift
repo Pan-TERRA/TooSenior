@@ -2,25 +2,25 @@
 import PackageDescription
 
 let package = Package(
-    name: "AuthCore",
+    name: "TooStorage",
     platforms: [
         .iOS(.v17)
     ],
     products: [
         .library(
-            name: "AuthCore",
-            targets: ["AuthCore"]
+            name: "TooStorage",
+            targets: ["TooStorage"]
         )
     ],
     targets: [
         .target(
-            name: "AuthCore",
+            name: "TooStorage",
             path: "Sources"
         ),
         .testTarget(
-            name: "AuthCoreTests",
-            dependencies: ["AuthCore"],
-            path: "Tests/AuthCoreTests"
+            name: "TooStorageTests",
+            dependencies: ["TooStorage"],
+            path: "Tests/TooStorageTests"
         )
     ]
 )
