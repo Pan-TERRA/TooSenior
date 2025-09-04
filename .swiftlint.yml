@@ -65,6 +65,7 @@ analyzer_rules:
 # Rule configurations
 trailing_newline: error
 trailing_whitespace: error
+force_unwrapping: error
 
 line_length:
   warning: 120

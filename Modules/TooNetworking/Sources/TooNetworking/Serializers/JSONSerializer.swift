@@ -1,6 +1,6 @@
 import Foundation
 
-public struct JSONSerializer<T: Codable & Sendable>: ResponseSerializer {
+public struct JSONSerializer<T: Decodable & Sendable>: ResponseSerializer {
     public typealias SerializedType = T
     
     private let decoder: JSONDecoder

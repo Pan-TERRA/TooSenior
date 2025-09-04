@@ -9,7 +9,7 @@ public struct HTTPRequest: Sendable {
     public let cachePolicy: URLRequest.CachePolicy
     public let authorization: Authorization
     
-    public init(
+    init(
         path: String,
         method: HTTPMethod,
         parameters: HTTPParameters = .empty,
