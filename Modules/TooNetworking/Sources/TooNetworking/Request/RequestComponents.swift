@@ -56,8 +56,6 @@ public struct JSONBody<T: Encodable & Sendable>: RequestComponent {
             let data = try encoder.encode(body)
             builder.setParameters(.body(data, .json))
         } catch {
-            // In a real implementation, you might want to handle this differently
-            // For now, we'll fall back to empty parameters
             builder.setParameters(.empty)
         }
     }
